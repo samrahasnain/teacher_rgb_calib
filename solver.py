@@ -54,6 +54,7 @@ class Solver(object):
 
                 atts_rgb, dets_rgb,x3_r,x4_r,x5_r = self.RGBnet(images)
                 atts_depth, dets_depth, x3_d,x4_d,x5_d = self.Dnet(depth)
+                print(atts_rgb.shape, dets_rgb.shape,atts_depth.shape, dets_depth.shape)
                 atts_rgb = np.squeeze(torch.sigmoid(atts_rgb)).cpu().data.numpy()
                 atts_rgb = (atts_rgb - atts_rgb.min()) / (atts_rgb.max() - atts_rgb.min() + 1e-8)
                 atts_rgb = 255 * atts_rgb
