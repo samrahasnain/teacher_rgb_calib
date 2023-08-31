@@ -54,22 +54,22 @@ class Solver(object):
 
                 atts_rgb, dets_rgb,x3_r,x4_r,x5_r = self.RGBnet(images)
                 atts_depth, dets_depth, x3_d,x4_d,x5_d = self.Dnet(depth)
-                atts_rgb = np.squeeze(torch.sigmoid(atts_rgbs)).cpu().data.numpy()
+                atts_rgb = np.squeeze(torch.sigmoid(atts_rgb)).cpu().data.numpy()
                 atts_rgb = (atts_rgb - atts_rgb.min()) / (atts_rgb.max() - atts_rgb.min() + 1e-8)
                 atts_rgb = 255 * atts_rgb
                 filename = os.path.join(self.config.test_folder_atts_rgb, name[:-4] + '_atts_rgb.png')
                 cv2.imwrite(filename, atts_rgb)
-                dets_rgb = np.squeeze(torch.sigmoid(dets_rgbs)).cpu().data.numpy()
+                dets_rgb = np.squeeze(torch.sigmoid(dets_rgb)).cpu().data.numpy()
                 dets_rgb = (dets_rgb - dets_rgb.min()) / (dets_rgb.max() - dets_rgb.min() + 1e-8)
                 dets_rgb = 255 * dets_rgb
                 filename = os.path.join(self.config.test_folder_dets_rgb, name[:-4] + '_dets_rgb.png')
                 cv2.imwrite(filename, dets_rgb)
-                atts_depth = np.squeeze(torch.sigmoid(atts_depths)).cpu().data.numpy()
+                atts_depth = np.squeeze(torch.sigmoid(atts_depth)).cpu().data.numpy()
                 atts_depth = (atts_depth - atts_depth.min()) / (atts_depth.max() - atts_depth.min() + 1e-8)
                 atts_depth = 255 * atts_depth
                 filename = os.path.join(self.config.test_folder_atts_depth, name[:-4] + '_atts_depth.png')
                 cv2.imwrite(filename, atts_depth)
-                dets_depth = np.squeeze(torch.sigmoid(dets_depths)).cpu().data.numpy()
+                dets_depth = np.squeeze(torch.sigmoid(dets_depth)).cpu().data.numpy()
                 dets_depth = (dets_depth - dets_depth.min()) / (dets_depth.max() - dets_depth.min() + 1e-8)
                 dets_depth = 255 * dets_depth
                 filename = os.path.join(self.config.test_folder_dets_depth, name[:-4] + '_dets_depth.png')
