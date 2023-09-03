@@ -14,9 +14,7 @@ def main(config):
         if not os.path.exists("%s/demo-%s" % (config.save_folder_rgb, time.strftime("%d"))):
             os.mkdir("%s/demo-%s" % (config.save_folder_rgb, time.strftime("%d")))
         config.save_folder_rgb = "%s/demo-%s" % (config.save_folder_rgb, time.strftime("%d"))
-        if not os.path.exists("%s/demo-%s" % (config.save_folder_depth, time.strftime("%d"))):
-            os.mkdir("%s/demo-%s" % (config.save_folder_depth, time.strftime("%d")))
-        config.save_folder_depth = "%s/demo-%s" % (config.save_folder_depth, time.strftime("%d"))
+
         train = Solver(train_loader, None, config)
         train.train()
     elif config.mode == 'test':
@@ -24,8 +22,7 @@ def main(config):
         test_loader = get_loader(config, mode='test')
         if not os.path.exists(config.test_folder_atts_rgb): os.makedirs(config.test_folder_atts_rgb)
         if not os.path.exists(config.test_folder_dets_rgb): os.makedirs(config.test_folder_dets_rgb)
-        if not os.path.exists(config.test_folder_atts_depth): os.makedirs(config.test_folder_atts_depth)
-        if not os.path.exists(config.test_folder_dets_depth): os.makedirs(config.test_folder_dets_depth)
+
         test = Solver(None, test_loader, config)
         test.test()
     else:
@@ -89,11 +86,10 @@ if __name__ == '__main__':
 
     # Testing settings
     parser.add_argument('--RGBmodel', type=str, default='./checkpoints/demo-08/epoch_40.pth')  # Snapshot
-    parser.add_argument('--Dmodel', type=str, default='./checkpoints/demo-08/epoch_40.pth')  # Snapshot
+   
     parser.add_argument('--test_folder_atts_rgb', type=str, default='testint')  # Test results saving folder
     parser.add_argument('--test_folder_dets_rgb', type=str, default='testint')  # Test results saving folder
-    parser.add_argument('--test_folder_atts_depth', type=str, default='testint')  # Test results saving folder
-    parser.add_argument('--test_folder_dets_depth', type=str, default='testint')  # Test results saving folder
+
     parser.add_argument('--sal_mode', type=str, default='RGBD135',
                         choices=['NJU2K', 'NLPR', 'STERE', 'RGBD135', 'LFSD', 'SIP', 'ReDWeb-S'])  # Test image dataset
     parser.add_argument('--test_root', type=str, default='../testsod/RGBD135/RGBD135')
@@ -104,8 +100,7 @@ if __name__ == '__main__':
 
     if not os.path.exists(config.save_folder_rgb):
         os.mkdir(config.save_folder_rgb)
-    if not os.path.exists(config.save_folder_depth):
-        os.mkdir(config.save_folder_depth)
+
 
     #get_test_info(config)
 
