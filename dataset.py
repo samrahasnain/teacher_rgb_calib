@@ -124,7 +124,7 @@ def get_loader(config, mode='train', pin=True):
       
     else:
         dataset = ImageDataTest(config.test_root, config.test_list, config.image_size)
-        data_loader = data.DataLoader(dataset=dataset, batch_size=config.batch_size_val, shuffle=shuffle,
+        data_loader = data.DataLoader(dataset=dataset, batch_size=config.batch_size, shuffle=shuffle,
                                       num_workers=config.num_thread, pin_memory=pin)
     
         return data_loader
